@@ -24,6 +24,7 @@
       --muted: #64748B;
       --border: #DCE8F5;
       --success: #16A34A;
+      --danger: #DC2626;
     }
 
     * {
@@ -436,11 +437,33 @@
       transform: translateY(-2px);
     }
 
+    .submit-button:disabled {
+      cursor: not-allowed;
+      opacity: .75;
+      transform: none;
+    }
+
     .privacy {
       margin-top: 12px;
       text-align: center;
       color: #94a3b8;
       font-size: 12px;
+    }
+
+    .status-message {
+      display: none;
+      margin-top: 15px;
+      padding: 12px 15px;
+      border-radius: 12px;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .status-message.error {
+      display: block;
+      background: #fef2f2;
+      color: var(--danger);
+      border: 1px solid #fecaca;
     }
 
     /* =========================
@@ -662,7 +685,12 @@
           SECTION A: SOCIO-DEMOGRAPHIC DATA
         </h2>
 
-        <!-- Age -->
+        <p class="section-description">
+          Please tick (✓) the appropriate option.
+        </p>
+
+
+        <!-- Q1 -->
         <div class="question">
 
           <label class="question-label">
@@ -700,7 +728,7 @@
         </div>
 
 
-        <!-- Sex -->
+        <!-- Q2 -->
         <div class="question">
 
           <label class="question-label">
@@ -724,7 +752,7 @@
         </div>
 
 
-        <!-- Marital -->
+        <!-- Q3 -->
         <div class="question">
 
           <label class="question-label">
@@ -753,7 +781,7 @@
         </div>
 
 
-        <!-- Residence -->
+        <!-- Q4 -->
         <div class="question">
 
           <label class="question-label">
@@ -787,11 +815,12 @@
         </div>
 
 
-        <!-- Travel -->
+        <!-- Q5 -->
         <div class="question">
 
           <label class="question-label">
-            5. Travel time to clinical practice <span class="required">*</span>
+            5. How long does it take you to travel to your clinical practice area?
+            <span class="required">*</span>
           </label>
 
           <div class="options">
@@ -831,10 +860,11 @@
         </h2>
 
 
+        <!-- Q6 -->
         <div class="question">
 
           <label class="question-label">
-            6. Have you ever been absent from clinical practice?
+            6. Have you ever been absent from scheduled clinical practice?
             <span class="required">*</span>
           </label>
 
@@ -855,10 +885,11 @@
         </div>
 
 
+        <!-- Q7 -->
         <div class="question">
 
           <label class="question-label">
-            7. How often are you absent?
+            7. How often are you absent from clinical practice?
             <span class="required">*</span>
           </label>
 
@@ -889,10 +920,11 @@
         </div>
 
 
+        <!-- Q8 -->
         <div class="question">
 
           <label class="question-label">
-            8. How often are you late?
+            8. How often do you arrive late for clinical practice?
             <span class="required">*</span>
           </label>
 
@@ -923,10 +955,11 @@
         </div>
 
 
+        <!-- Q9 -->
         <div class="question">
 
           <label class="question-label">
-            9. What is the major reason for your absence?
+            9. What is the major reason for your absence from clinical practice?
             <span class="required">*</span>
           </label>
 
@@ -982,7 +1015,7 @@
         </h2>
 
         <p class="section-description">
-          Please select one response for each statement.
+          Instruction: Tick (✓) the option that best represents your opinion.
         </p>
 
         <div class="table-wrapper">
@@ -990,341 +1023,242 @@
           <table class="likert">
 
             <thead>
-
               <tr>
-
-                <th>
-                  Statement
-                </th>
-
-                <th>
-                  Strongly Agree
-                </th>
-
-                <th>
-                  Agree
-                </th>
-
-                <th>
-                  Disagree
-                </th>
-
-                <th>
-                  Strongly Disagree
-                </th>
-
+                <th>Statement</th>
+                <th>SA</th>
+                <th>A</th>
+                <th>D</th>
+                <th>SD</th>
               </tr>
-
             </thead>
 
             <tbody>
 
-
               <tr>
-
                 <td>
                   10. Illness or poor health can make me absent from clinical practice.
                 </td>
-
                 <td>
                   <input required type="radio" name="q10" value="Strongly Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q10" value="Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q10" value="Disagree">
                 </td>
-
                 <td>
                   <input type="radio" name="q10" value="Strongly Disagree">
                 </td>
-
               </tr>
 
-
               <tr>
-
                 <td>
                   11. Fatigue and stress affect my clinical attendance.
                 </td>
-
                 <td>
                   <input required type="radio" name="q11" value="Strongly Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q11" value="Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q11" value="Disagree">
                 </td>
-
                 <td>
                   <input type="radio" name="q11" value="Strongly Disagree">
                 </td>
-
               </tr>
 
-
               <tr>
-
                 <td>
                   12. Financial difficulties can affect my attendance.
                 </td>
-
                 <td>
                   <input required type="radio" name="q12" value="Strongly Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q12" value="Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q12" value="Disagree">
                 </td>
-
                 <td>
                   <input type="radio" name="q12" value="Strongly Disagree">
                 </td>
-
               </tr>
 
-
               <tr>
-
                 <td>
                   13. Transportation problems can make me absent.
                 </td>
-
                 <td>
                   <input required type="radio" name="q13" value="Strongly Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q13" value="Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q13" value="Disagree">
                 </td>
-
                 <td>
                   <input type="radio" name="q13" value="Strongly Disagree">
                 </td>
-
               </tr>
 
-
               <tr>
-
                 <td>
                   14. Family or personal responsibilities can affect my attendance.
                 </td>
-
                 <td>
                   <input required type="radio" name="q14" value="Strongly Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q14" value="Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q14" value="Disagree">
                 </td>
-
                 <td>
                   <input type="radio" name="q14" value="Strongly Disagree">
                 </td>
-
               </tr>
 
-
               <tr>
-
                 <td>
                   15. Heavy academic workload can affect my clinical attendance.
                 </td>
-
                 <td>
                   <input required type="radio" name="q15" value="Strongly Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q15" value="Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q15" value="Disagree">
                 </td>
-
                 <td>
                   <input type="radio" name="q15" value="Strongly Disagree">
                 </td>
-
               </tr>
 
-
               <tr>
-
                 <td>
                   16. Examination and assignment pressure can contribute to absenteeism.
                 </td>
-
                 <td>
                   <input required type="radio" name="q16" value="Strongly Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q16" value="Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q16" value="Disagree">
                 </td>
-
                 <td>
                   <input type="radio" name="q16" value="Strongly Disagree">
                 </td>
-
               </tr>
 
-
               <tr>
-
                 <td>
                   17. Inconvenient clinical schedules can affect attendance.
                 </td>
-
                 <td>
                   <input required type="radio" name="q17" value="Strongly Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q17" value="Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q17" value="Disagree">
                 </td>
-
                 <td>
                   <input type="radio" name="q17" value="Strongly Disagree">
                 </td>
-
               </tr>
 
-
               <tr>
-
                 <td>
                   18. Poor communication of clinical schedules can contribute to absenteeism.
                 </td>
-
                 <td>
                   <input required type="radio" name="q18" value="Strongly Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q18" value="Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q18" value="Disagree">
                 </td>
-
                 <td>
                   <input type="radio" name="q18" value="Strongly Disagree">
                 </td>
-
               </tr>
 
-
               <tr>
-
                 <td>
                   19. Poor supervision by clinical instructors can discourage attendance.
                 </td>
-
                 <td>
                   <input required type="radio" name="q19" value="Strongly Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q19" value="Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q19" value="Disagree">
                 </td>
-
                 <td>
                   <input type="radio" name="q19" value="Strongly Disagree">
                 </td>
-
               </tr>
 
-
               <tr>
-
                 <td>
                   20. The attitude of clinical staff can affect my attendance.
                 </td>
-
                 <td>
                   <input required type="radio" name="q20" value="Strongly Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q20" value="Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q20" value="Disagree">
                 </td>
-
                 <td>
                   <input type="radio" name="q20" value="Strongly Disagree">
                 </td>
-
               </tr>
 
-
               <tr>
-
                 <td>
                   21. Lack of adequate learning opportunities can reduce my motivation to attend.
                 </td>
-
                 <td>
                   <input required type="radio" name="q21" value="Strongly Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q21" value="Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q21" value="Disagree">
                 </td>
-
                 <td>
                   <input type="radio" name="q21" value="Strongly Disagree">
                 </td>
-
               </tr>
-
 
             </tbody>
 
           </table>
 
         </div>
+
+        <p class="section-description">
+          Key: SA = Strongly Agree, A = Agree, D = Disagree, SD = Strongly Disagree.
+        </p>
 
       </section>
 
@@ -1337,7 +1271,7 @@
         </h2>
 
         <p class="section-description">
-          Please select one response for each statement.
+          Instruction: Tick (✓) the option that best represents your opinion.
         </p>
 
         <div class="table-wrapper">
@@ -1345,191 +1279,134 @@
           <table class="likert">
 
             <thead>
-
               <tr>
-
-                <th>
-                  Statement
-                </th>
-
-                <th>
-                  Strongly Agree
-                </th>
-
-                <th>
-                  Agree
-                </th>
-
-                <th>
-                  Disagree
-                </th>
-
-                <th>
-                  Strongly Disagree
-                </th>
-
+                <th>Statement</th>
+                <th>SA</th>
+                <th>A</th>
+                <th>D</th>
+                <th>SD</th>
               </tr>
-
             </thead>
 
             <tbody>
 
-
               <tr>
-
                 <td>
                   22. Better supervision by clinical instructors can improve attendance.
                 </td>
-
                 <td>
                   <input required type="radio" name="q22" value="Strongly Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q22" value="Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q22" value="Disagree">
                 </td>
-
                 <td>
                   <input type="radio" name="q22" value="Strongly Disagree">
                 </td>
-
               </tr>
 
-
               <tr>
-
                 <td>
                   23. Proper coordination of academic and clinical schedules can reduce absenteeism.
                 </td>
-
                 <td>
                   <input required type="radio" name="q23" value="Strongly Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q23" value="Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q23" value="Disagree">
                 </td>
-
                 <td>
                   <input type="radio" name="q23" value="Strongly Disagree">
                 </td>
-
               </tr>
 
-
               <tr>
-
                 <td>
                   24. Counselling and student support can improve clinical attendance.
                 </td>
-
                 <td>
                   <input required type="radio" name="q24" value="Strongly Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q24" value="Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q24" value="Disagree">
                 </td>
-
                 <td>
                   <input type="radio" name="q24" value="Strongly Disagree">
                 </td>
-
               </tr>
 
-
               <tr>
-
                 <td>
                   25. A supportive clinical environment can encourage regular attendance.
                 </td>
-
                 <td>
                   <input required type="radio" name="q25" value="Strongly Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q25" value="Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q25" value="Disagree">
                 </td>
-
                 <td>
                   <input type="radio" name="q25" value="Strongly Disagree">
                 </td>
-
               </tr>
 
-
               <tr>
-
                 <td>
                   26. Adequate clinical resources can encourage students to attend regularly.
                 </td>
-
                 <td>
                   <input required type="radio" name="q26" value="Strongly Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q26" value="Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q26" value="Disagree">
                 </td>
-
                 <td>
                   <input type="radio" name="q26" value="Strongly Disagree">
                 </td>
-
               </tr>
 
-
               <tr>
-
                 <td>
                   27. Clear clinical schedules and attendance requirements can reduce absenteeism.
                 </td>
-
                 <td>
                   <input required type="radio" name="q27" value="Strongly Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q27" value="Agree">
                 </td>
-
                 <td>
                   <input type="radio" name="q27" value="Disagree">
                 </td>
-
                 <td>
                   <input type="radio" name="q27" value="Strongly Disagree">
                 </td>
-
               </tr>
-
 
             </tbody>
 
           </table>
 
         </div>
+
+        <p class="section-description">
+          Key: SA = Strongly Agree, A = Agree, D = Disagree, SD = Strongly Disagree.
+        </p>
 
       </section>
 
@@ -1539,10 +1416,16 @@
 
         <button
           type="submit"
+          id="submitButton"
           class="submit-button"
         >
           Submit Questionnaire
         </button>
+
+        <div
+          id="statusMessage"
+          class="status-message"
+        ></div>
 
         <div class="privacy">
           Your responses are intended for academic research purposes.
@@ -1553,7 +1436,7 @@
     </form>
 
 
-    <!-- Success message -->
+    <!-- Success -->
     <div
       id="success"
       class="form-card success"
@@ -1572,7 +1455,7 @@
       </p>
 
       <p>
-        Your response has been received.
+        Your response has been received successfully.
       </p>
 
     </div>
@@ -1602,31 +1485,83 @@
   <script>
 
     /*
-      ==========================================
-      BASIC FORM SUBMISSION
-      ==========================================
-
-      This currently displays a success screen.
-
-      IMPORTANT:
-      Responses are NOT permanently stored yet.
-
-      The next step is connecting this form to
-      Google Sheets / Supabase so every response
-      is saved automatically.
+    ==========================================================
+    GOOGLE APPS SCRIPT WEB APP
+    ==========================================================
     */
 
-    const form = document.getElementById("researchForm");
+    const SCRIPT_URL =
+      "https://script.google.com/macros/s/AKfycbxMLDeSV_TmN67iZhEUcWyVdgsxOC2I5o9Sha9y9rtIzwLo0g5cg64KXuypy-OZvvNIfA/exec";
 
-    const success = document.getElementById("success");
 
-    form.addEventListener("submit", function(event) {
+    /*
+    ==========================================================
+    FORM ELEMENTS
+    ==========================================================
+    */
+
+    const form =
+      document.getElementById("researchForm");
+
+    const success =
+      document.getElementById("success");
+
+    const submitButton =
+      document.getElementById("submitButton");
+
+    const statusMessage =
+      document.getElementById("statusMessage");
+
+
+    /*
+    ==========================================================
+    SHOW ERROR
+    ==========================================================
+    */
+
+    function showError(message) {
+
+      statusMessage.textContent = message;
+
+      statusMessage.className =
+        "status-message error";
+
+    }
+
+
+    /*
+    ==========================================================
+    CLEAR ERROR
+    ==========================================================
+    */
+
+    function clearStatus() {
+
+      statusMessage.textContent = "";
+
+      statusMessage.className =
+        "status-message";
+
+    }
+
+
+    /*
+    ==========================================================
+    FORM SUBMISSION
+    ==========================================================
+    */
+
+    form.addEventListener("submit", async function(event) {
 
       event.preventDefault();
 
+      clearStatus();
+
+
       /*
-        Check that all required questions
-        have been answered.
+      --------------------------------------------------------
+      CHECK REQUIRED QUESTIONS
+      --------------------------------------------------------
       */
 
       if (!form.checkValidity()) {
@@ -1637,24 +1572,206 @@
 
       }
 
+
       /*
-        Show success screen.
+      --------------------------------------------------------
+      DISABLE BUTTON
+      --------------------------------------------------------
       */
 
-      form.style.display = "none";
+      submitButton.disabled = true;
 
-      success.style.display = "flex";
+      submitButton.textContent =
+        "Submitting response...";
 
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
+
+      /*
+      --------------------------------------------------------
+      COLLECT FORM DATA
+      --------------------------------------------------------
+      */
+
+      const formData =
+        new FormData(form);
+
+
+      /*
+      --------------------------------------------------------
+      BUILD DATA OBJECT
+      --------------------------------------------------------
+      */
+
+      const data = {
+
+        age:
+          formData.get("age") || "",
+
+        sex:
+          formData.get("sex") || "",
+
+        maritalStatus:
+          formData.get("marital_status") || "",
+
+        residence:
+          formData.get("residence") || "",
+
+        travelTime:
+          formData.get("travel_time") || "",
+
+
+        everAbsent:
+          formData.get("ever_absent") || "",
+
+        absenceFrequency:
+          formData.get("absence_frequency") || "",
+
+        latenessFrequency:
+          formData.get("late_frequency") || "",
+
+        majorReason:
+          formData.get("major_reason") || "",
+
+
+        q10:
+          formData.get("q10") || "",
+
+        q11:
+          formData.get("q11") || "",
+
+        q12:
+          formData.get("q12") || "",
+
+        q13:
+          formData.get("q13") || "",
+
+        q14:
+          formData.get("q14") || "",
+
+        q15:
+          formData.get("q15") || "",
+
+        q16:
+          formData.get("q16") || "",
+
+        q17:
+          formData.get("q17") || "",
+
+        q18:
+          formData.get("q18") || "",
+
+        q19:
+          formData.get("q19") || "",
+
+        q20:
+          formData.get("q20") || "",
+
+        q21:
+          formData.get("q21") || "",
+
+
+        q22:
+          formData.get("q22") || "",
+
+        q23:
+          formData.get("q23") || "",
+
+        q24:
+          formData.get("q24") || "",
+
+        q25:
+          formData.get("q25") || "",
+
+        q26:
+          formData.get("q26") || "",
+
+        q27:
+          formData.get("q27") || ""
+
+      };
+
+
+      /*
+      --------------------------------------------------------
+      SEND TO GOOGLE APPS SCRIPT
+      --------------------------------------------------------
+
+      text/plain is deliberately used here so the browser
+      can send the request without a normal JSON CORS
+      preflight request.
+
+      The Apps Script receives the body as JSON.
+      --------------------------------------------------------
+      */
+
+      try {
+
+        await fetch(
+          SCRIPT_URL,
+          {
+            method: "POST",
+
+            mode: "no-cors",
+
+            headers: {
+              "Content-Type":
+                "text/plain;charset=utf-8"
+            },
+
+            body:
+              JSON.stringify(data)
+          }
+        );
+
+
+        /*
+        ------------------------------------------------------
+        SUCCESS
+        ------------------------------------------------------
+        */
+
+        form.style.display = "none";
+
+        success.style.display = "flex";
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+
+
+      } catch (error) {
+
+        console.error(
+          "Submission error:",
+          error
+        );
+
+
+        /*
+        ------------------------------------------------------
+        ERROR
+        ------------------------------------------------------
+        */
+
+        showError(
+          "We could not submit your response. Please check your internet connection and try again."
+        );
+
+
+        submitButton.disabled = false;
+
+        submitButton.textContent =
+          "Submit Questionnaire";
+
+      }
 
     });
 
 
     /*
-      Current year
+    ==========================================================
+    CURRENT YEAR
+    ==========================================================
     */
 
     document.getElementById("year").textContent =

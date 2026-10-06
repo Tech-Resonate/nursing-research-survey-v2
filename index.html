@@ -1,242 +1,1666 @@
-"use client";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-import { motion } from "framer-motion";
-import Link from "next/link";
+  <title>Research Questionnaire | Tech Resonate Forms</title>
 
-export default function Home() {
-  return (
-    <main className="min-h-screen overflow-hidden bg-[#0B1A2E] text-white">
-      {/* Animated background */}
-      <div className="pointer-events-none fixed inset-0 overflow-hidden">
-        <motion.div
-          animate={{
-            x: [0, 120, -80, 0],
-            y: [0, -80, 100, 0],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute left-[10%] top-[15%] h-72 w-72 rounded-full bg-[#3B82F6]/20 blur-3xl"
-        />
+  <meta
+    name="description"
+    content="Research questionnaire powered by Tech Resonate Forms."
+  >
 
-        <motion.div
-          animate={{
-            x: [0, -100, 100, 0],
-            y: [0, 120, -60, 0],
-          }}
-          transition={{
-            duration: 22,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute right-[5%] top-[30%] h-96 w-96 rounded-full bg-[#60A5FA]/15 blur-3xl"
-        />
+  <style>
+    :root {
+      --navy: #0B1A2E;
+      --navy2: #0F1F35;
+      --blue: #3B82F6;
+      --light-blue: #60A5FA;
+      --soft-blue: #DCEEFF;
+      --pale-blue: #F5F9FF;
+      --white: #FFFFFF;
+      --text: #132238;
+      --muted: #64748B;
+      --border: #DCE8F5;
+      --success: #16A34A;
+    }
 
-        <motion.div
-          animate={{
-            scale: [1, 1.25, 1],
-            opacity: [0.15, 0.3, 0.15],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute bottom-[5%] left-[40%] h-80 w-80 rounded-full bg-[#3B82F6]/10 blur-3xl"
-        />
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        {/* Moving grid */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(96,165,250,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(96,165,250,0.06)_1px,transparent_1px)] bg-[size:60px_60px]" />
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      background: var(--pale-blue);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* =========================
+       ANIMATED BACKGROUND
+    ========================= */
+
+    .background {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+      background: var(--navy);
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: .3;
+      animation: float 16s ease-in-out infinite;
+    }
+
+    .orb.one {
+      width: 350px;
+      height: 350px;
+      background: var(--blue);
+      left: -80px;
+      top: 100px;
+    }
+
+    .orb.two {
+      width: 420px;
+      height: 420px;
+      background: var(--light-blue);
+      right: -120px;
+      top: 200px;
+      animation-duration: 21s;
+    }
+
+    .orb.three {
+      width: 300px;
+      height: 300px;
+      background: var(--blue);
+      left: 40%;
+      bottom: -100px;
+      animation-duration: 13s;
+    }
+
+    .grid {
+      position: absolute;
+      inset: 0;
+
+      background-image:
+        linear-gradient(
+          rgba(96,165,250,.06) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(96,165,250,.06) 1px,
+          transparent 1px
+        );
+
+      background-size: 60px 60px;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      33% {
+        transform: translate(80px, -60px) scale(1.08);
+      }
+
+      66% {
+        transform: translate(-60px, 80px) scale(.95);
+      }
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+      position: relative;
+      z-index: 2;
+      background: var(--navy);
+      color: white;
+      padding: 20px;
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 13px;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--navy);
+      font-weight: 900;
+      font-size: 19px;
+    }
+
+    .brand-name {
+      font-weight: 800;
+      font-size: 16px;
+    }
+
+    .brand-sub {
+      color: var(--light-blue);
+      font-size: 12px;
+      margin-top: 1px;
+    }
+
+    .badge {
+      padding: 8px 13px;
+      border: 1px solid rgba(255,255,255,.15);
+      background: rgba(255,255,255,.06);
+      border-radius: 999px;
+      color: #dbeafe;
+      font-size: 12px;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      position: relative;
+      z-index: 1;
+      background: var(--navy);
+      color: white;
+      padding: 60px 20px 75px;
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(96,165,250,.12);
+      border: 1px solid rgba(96,165,250,.25);
+      color: #bfdbfe;
+      font-size: 13px;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      max-width: 850px;
+      font-size: clamp(32px, 5vw, 62px);
+      line-height: 1.08;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+    }
+
+    .hero h1 span {
+      color: var(--light-blue);
+    }
+
+    .hero p {
+      max-width: 720px;
+      margin-top: 20px;
+      color: #bfdbfe;
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    main {
+      position: relative;
+      z-index: 3;
+      max-width: 900px;
+      margin: -35px auto 70px;
+      padding: 0 16px;
+    }
+
+    .form-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      box-shadow: 0 25px 70px rgba(11,26,46,.14);
+      overflow: hidden;
+    }
+
+    .consent {
+      padding: 30px;
+      background: linear-gradient(
+        135deg,
+        #ffffff,
+        #f5f9ff
+      );
+      border-bottom: 1px solid var(--border);
+    }
+
+    .consent h2,
+    .section h2 {
+      color: var(--navy);
+      font-size: 21px;
+      font-weight: 850;
+    }
+
+    .consent p {
+      color: var(--muted);
+      margin-top: 12px;
+    }
+
+    .section {
+      padding: 30px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-description {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* =========================
+       QUESTIONS
+    ========================= */
+
+    .question {
+      margin-top: 27px;
+    }
+
+    .question-label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--navy);
+    }
+
+    .required {
+      color: #ef4444;
+      margin-left: 3px;
+    }
+
+    .options {
+      display: grid;
+      gap: 8px;
+    }
+
+    .option {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 15px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      transition: .2s ease;
+      background: white;
+    }
+
+    .option:hover {
+      border-color: var(--light-blue);
+      background: #f8fbff;
+      transform: translateY(-1px);
+    }
+
+    .option input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--blue);
+    }
+
+    .option span {
+      font-size: 14px;
+    }
+
+    /* =========================
+       LIKERT TABLE
+    ========================= */
+
+    .table-wrapper {
+      margin-top: 25px;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .likert {
+      width: 100%;
+      min-width: 760px;
+      border-collapse: collapse;
+    }
+
+    .likert th {
+      background: #f1f7ff;
+      color: var(--navy);
+      padding: 13px 10px;
+      font-size: 12px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .likert th:first-child {
+      text-align: left;
+      min-width: 350px;
+    }
+
+    .likert td {
+      padding: 14px 10px;
+      border-bottom: 1px solid #edf3f9;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .likert td:first-child {
+      text-align: left;
+      color: #334155;
+    }
+
+    .likert tr:last-child td {
+      border-bottom: none;
+    }
+
+    .likert input {
+      width: 17px;
+      height: 17px;
+      accent-color: var(--blue);
+    }
+
+    /* =========================
+       SUBMIT
+    ========================= */
+
+    .submit-area {
+      padding: 30px;
+      background: #f8fbff;
+    }
+
+    .submit-button {
+      width: 100%;
+      border: none;
+      border-radius: 16px;
+      padding: 17px;
+      background: var(--blue);
+      color: white;
+      font-weight: 800;
+      font-size: 16px;
+      box-shadow: 0 12px 30px rgba(59,130,246,.22);
+      transition: .2s ease;
+    }
+
+    .submit-button:hover {
+      background: #2563eb;
+      transform: translateY(-2px);
+    }
+
+    .privacy {
+      margin-top: 12px;
+      text-align: center;
+      color: #94a3b8;
+      font-size: 12px;
+    }
+
+    /* =========================
+       SUCCESS
+    ========================= */
+
+    .success {
+      display: none;
+      min-height: 500px;
+      padding: 70px 30px;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .success-icon {
+      width: 75px;
+      height: 75px;
+      border-radius: 50%;
+      background: #ecfdf5;
+      color: var(--success);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 35px;
+      margin-bottom: 22px;
+    }
+
+    .success h2 {
+      color: var(--navy);
+      font-size: 30px;
+      font-weight: 900;
+    }
+
+    .success p {
+      margin-top: 10px;
+      color: var(--muted);
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      position: relative;
+      z-index: 2;
+      background: var(--navy);
+      color: #94a3b8;
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 13px;
+    }
+
+    footer strong {
+      color: white;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 700px) {
+
+      header {
+        padding: 15px;
+      }
+
+      .badge {
+        display: none;
+      }
+
+      .hero {
+        padding: 45px 18px 65px;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      main {
+        margin-top: -25px;
+      }
+
+      .consent,
+      .section,
+      .submit-area {
+        padding: 22px 18px;
+      }
+
+      .consent h2,
+      .section h2 {
+        font-size: 19px;
+      }
+
+      .question {
+        margin-top: 23px;
+      }
+
+      .option {
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Animated background -->
+  <div class="background">
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+    <div class="orb three"></div>
+    <div class="grid"></div>
+  </div>
+
+
+  <!-- Header -->
+  <header>
+    <div class="header-inner">
+
+      <div class="brand">
+        <div class="logo">TR</div>
+
+        <div>
+          <div class="brand-name">
+            Tech Resonate
+          </div>
+
+          <div class="brand-sub">
+            Forms
+          </div>
+        </div>
       </div>
 
-      {/* Navbar */}
-      <nav className="relative z-10 mx-auto flex max-w-7xl items-center justify-between px-6 py-6 lg:px-10">
-        <Link href="/" className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white">
-            <span className="text-xl font-black text-[#0B1A2E]">TR</span>
-          </div>
+      <div class="badge">
+        Research Questionnaire
+      </div>
 
-          <div>
-            <div className="font-bold tracking-tight">
-              Tech Resonate
-            </div>
-            <div className="text-xs text-[#60A5FA]">
-              Forms
-            </div>
-          </div>
-        </Link>
+    </div>
+  </header>
 
-        <div className="hidden items-center gap-8 text-sm text-blue-100 md:flex">
-          <a href="#features" className="transition hover:text-white">
-            Features
-          </a>
 
-          <a href="#how-it-works" className="transition hover:text-white">
-            How it works
-          </a>
+  <!-- Hero -->
+  <section class="hero">
 
-          <Link
-            href="/dashboard"
-            className="transition hover:text-white"
-          >
-            Dashboard
-          </Link>
-        </div>
+    <div class="hero-inner">
 
-        <Link
-          href="/builder"
-          className="rounded-xl bg-[#3B82F6] px-5 py-3 text-sm font-semibold shadow-lg shadow-blue-500/20 transition hover:-translate-y-0.5 hover:bg-[#60A5FA]"
-        >
-          Create a Form
-        </Link>
-      </nav>
+      <div class="hero-label">
+        Tech Resonate Forms
+      </div>
 
-      {/* Hero */}
-      <section className="relative z-10 mx-auto flex min-h-[75vh] max-w-7xl items-center px-6 py-20 lg:px-10">
-        <div className="max-w-4xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="mb-6 inline-flex rounded-full border border-blue-300/20 bg-blue-400/10 px-4 py-2 text-sm text-blue-200 backdrop-blur"
-          >
-            Simple forms. Powerful responses.
-          </motion.div>
+      <h1>
+        Research Questionnaire
+        <span>for Clinical Practice</span>
+      </h1>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-5xl font-black leading-[1.05] tracking-tight sm:text-6xl lg:text-8xl"
-          >
-            Create.
-            <span className="block text-[#60A5FA]">
-              Share.
-            </span>
-            <span className="block">
-              Collect.
-            </span>
-          </motion.h1>
+      <p>
+        Assessment of Factors Influencing Absenteeism from
+        Clinical Practice among Final-Year Student Nurses in
+        Niger State College of Nursing Sciences, School of
+        Nursing Sciences, Bida.
+      </p>
 
-          <motion.p
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mt-7 max-w-2xl text-lg leading-8 text-blue-100/80"
-          >
-            Build professional questionnaires, surveys, registrations
-            and feedback forms with Tech Resonate Forms.
-          </motion.p>
+    </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="mt-10 flex flex-wrap gap-4"
-          >
-            <Link
-              href="/builder"
-              className="rounded-2xl bg-white px-7 py-4 font-bold text-[#0B1A2E] shadow-xl transition hover:-translate-y-1"
-            >
-              Build your first form →
-            </Link>
+  </section>
 
-            <a
-              href="#features"
-              className="rounded-2xl border border-blue-300/20 bg-white/5 px-7 py-4 font-semibold text-white backdrop-blur transition hover:bg-white/10"
-            >
-              Explore features
-            </a>
-          </motion.div>
-        </div>
-      </section>
 
-      {/* Features */}
-      <section
-        id="features"
-        className="relative z-10 bg-white px-6 py-24 text-[#0B1A2E]"
-      >
-        <div className="mx-auto max-w-7xl">
-          <div className="max-w-2xl">
-            <p className="font-semibold text-[#3B82F6]">
-              BUILT FOR REAL WORK
-            </p>
+  <!-- Questionnaire -->
+  <main>
 
-            <h2 className="mt-3 text-4xl font-black tracking-tight md:text-5xl">
-              Everything you need to collect better responses.
-            </h2>
-          </div>
+    <form
+      id="researchForm"
+      class="form-card"
+    >
 
-          <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {[
-              {
-                title: "Form Builder",
-                text: "Create questionnaires and surveys without coding.",
-              },
-              {
-                title: "Research Ready",
-                text: "Use grids, scales and structured questions.",
-              },
-              {
-                title: "Response Analytics",
-                text: "Understand your responses with simple visual reports.",
-              },
-              {
-                title: "Excel Export",
-                text: "Export collected responses for further analysis.",
-              },
-            ].map((feature, index) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.08 }}
-                whileHover={{ y: -6 }}
-                className="rounded-3xl border border-blue-100 bg-white p-7 shadow-sm transition hover:shadow-xl"
-              >
-                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#0B1A2E] text-[#60A5FA]">
-                  {index + 1}
-                </div>
+      <!-- Consent -->
+      <div class="consent">
 
-                <h3 className="text-xl font-bold">
-                  {feature.title}
-                </h3>
-
-                <p className="mt-3 leading-7 text-slate-600">
-                  {feature.text}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="relative z-10 bg-[#0F1F35] px-6 py-24 text-center">
-        <h2 className="text-4xl font-black md:text-5xl">
-          Ready to build your form?
+        <h2>
+          INFORM CONSENT
         </h2>
 
-        <p className="mx-auto mt-5 max-w-xl text-blue-100/70">
-          Start with a simple form and turn responses into useful
-          information.
+        <p>
+          Dear respondent,
         </p>
 
-        <Link
-          href="/builder"
-          className="mt-8 inline-block rounded-2xl bg-[#3B82F6] px-8 py-4 font-bold transition hover:bg-[#60A5FA]"
-        >
-          Create a Form
-        </Link>
+        <p>
+          The designer of this questionnaire is a student of
+          Niger State College of Nursing Sciences, School of
+          Nursing Sciences, Bida, who is currently carrying out
+          a research on
+          <strong>
+            “Assessment of Factors Influencing Absenteeism
+            from Clinical Practice among Final-Year Student
+            Nurses in Niger State College of Nursing Sciences,
+            School of Nursing Sciences, Bida.”
+          </strong>
+        </p>
+
+        <p>
+          You are kindly requested to provide honest responses.
+          The information provided will be treated as confidential
+          and used strictly for academic purposes.
+        </p>
+
+        <p>
+          Thank you for your cooperation.
+        </p>
+
+      </div>
+
+
+      <!-- SECTION A -->
+      <section class="section">
+
+        <h2>
+          SECTION A: SOCIO-DEMOGRAPHIC DATA
+        </h2>
+
+        <!-- Age -->
+        <div class="question">
+
+          <label class="question-label">
+            1. Age <span class="required">*</span>
+          </label>
+
+          <div class="options">
+
+            <label class="option">
+              <input required type="radio" name="age" value="18–20">
+              <span>18–20</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="age" value="21–23">
+              <span>21–23</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="age" value="24–26">
+              <span>24–26</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="age" value="27–29">
+              <span>27–29</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="age" value="30 and above">
+              <span>30 and above</span>
+            </label>
+
+          </div>
+        </div>
+
+
+        <!-- Sex -->
+        <div class="question">
+
+          <label class="question-label">
+            2. Sex <span class="required">*</span>
+          </label>
+
+          <div class="options">
+
+            <label class="option">
+              <input required type="radio" name="sex" value="Male">
+              <span>Male</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="sex" value="Female">
+              <span>Female</span>
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <!-- Marital -->
+        <div class="question">
+
+          <label class="question-label">
+            3. Marital Status <span class="required">*</span>
+          </label>
+
+          <div class="options">
+
+            <label class="option">
+              <input required type="radio" name="marital_status" value="Single">
+              <span>Single</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="marital_status" value="Married">
+              <span>Married</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="marital_status" value="Other">
+              <span>Other</span>
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <!-- Residence -->
+        <div class="question">
+
+          <label class="question-label">
+            4. Place of Residence <span class="required">*</span>
+          </label>
+
+          <div class="options">
+
+            <label class="option">
+              <input required type="radio" name="residence" value="School Hostel">
+              <span>School Hostel</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="residence" value="Private Residence">
+              <span>Private Residence</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="residence" value="Parents/Guardian">
+              <span>Parents/Guardian</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="residence" value="Other">
+              <span>Other</span>
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <!-- Travel -->
+        <div class="question">
+
+          <label class="question-label">
+            5. Travel time to clinical practice <span class="required">*</span>
+          </label>
+
+          <div class="options">
+
+            <label class="option">
+              <input required type="radio" name="travel_time" value="Less than 15 minutes">
+              <span>Less than 15 minutes</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="travel_time" value="15–30 minutes">
+              <span>15–30 minutes</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="travel_time" value="31–60 minutes">
+              <span>31–60 minutes</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="travel_time" value="Above 60 minutes">
+              <span>Above 60 minutes</span>
+            </label>
+
+          </div>
+
+        </div>
+
       </section>
 
-      {/* Footer */}
-      <footer className="relative z-10 border-t border-blue-200/10 bg-[#0B1A2E] px-6 py-8 text-center text-sm text-blue-100/50">
-        © {new Date().getFullYear()} Tech Resonate. All rights reserved.
-      </footer>
-    </main>
-  );
-}
+
+      <!-- SECTION B -->
+      <section class="section">
+
+        <h2>
+          SECTION B: CLINICAL ATTENDANCE
+        </h2>
+
+
+        <div class="question">
+
+          <label class="question-label">
+            6. Have you ever been absent from clinical practice?
+            <span class="required">*</span>
+          </label>
+
+          <div class="options">
+
+            <label class="option">
+              <input required type="radio" name="ever_absent" value="Yes">
+              <span>Yes</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="ever_absent" value="No">
+              <span>No</span>
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <div class="question">
+
+          <label class="question-label">
+            7. How often are you absent?
+            <span class="required">*</span>
+          </label>
+
+          <div class="options">
+
+            <label class="option">
+              <input required type="radio" name="absence_frequency" value="Never">
+              <span>Never</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="absence_frequency" value="Once">
+              <span>Once</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="absence_frequency" value="2–3 times">
+              <span>2–3 times</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="absence_frequency" value="4 times or more">
+              <span>4 times or more</span>
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <div class="question">
+
+          <label class="question-label">
+            8. How often are you late?
+            <span class="required">*</span>
+          </label>
+
+          <div class="options">
+
+            <label class="option">
+              <input required type="radio" name="late_frequency" value="Never">
+              <span>Never</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="late_frequency" value="Rarely">
+              <span>Rarely</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="late_frequency" value="Sometimes">
+              <span>Sometimes</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="late_frequency" value="Often">
+              <span>Often</span>
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <div class="question">
+
+          <label class="question-label">
+            9. What is the major reason for your absence?
+            <span class="required">*</span>
+          </label>
+
+          <div class="options">
+
+            <label class="option">
+              <input required type="radio" name="major_reason" value="Illness/Health">
+              <span>Illness/Health</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="major_reason" value="Transportation">
+              <span>Transportation</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="major_reason" value="Financial Problems">
+              <span>Financial Problems</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="major_reason" value="Academic Workload">
+              <span>Academic Workload</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="major_reason" value="Family/Personal Issues">
+              <span>Family/Personal Issues</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="major_reason" value="Lack of Motivation">
+              <span>Lack of Motivation</span>
+            </label>
+
+            <label class="option">
+              <input type="radio" name="major_reason" value="Other">
+              <span>Other</span>
+            </label>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- SECTION C -->
+      <section class="section">
+
+        <h2>
+          SECTION C: FACTORS INFLUENCING ABSENTEEISM
+        </h2>
+
+        <p class="section-description">
+          Please select one response for each statement.
+        </p>
+
+        <div class="table-wrapper">
+
+          <table class="likert">
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Statement
+                </th>
+
+                <th>
+                  Strongly Agree
+                </th>
+
+                <th>
+                  Agree
+                </th>
+
+                <th>
+                  Disagree
+                </th>
+
+                <th>
+                  Strongly Disagree
+                </th>
+
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+
+              <tr>
+
+                <td>
+                  10. Illness or poor health can make me absent from clinical practice.
+                </td>
+
+                <td>
+                  <input required type="radio" name="q10" value="Strongly Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q10" value="Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q10" value="Disagree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q10" value="Strongly Disagree">
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+                  11. Fatigue and stress affect my clinical attendance.
+                </td>
+
+                <td>
+                  <input required type="radio" name="q11" value="Strongly Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q11" value="Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q11" value="Disagree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q11" value="Strongly Disagree">
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+                  12. Financial difficulties can affect my attendance.
+                </td>
+
+                <td>
+                  <input required type="radio" name="q12" value="Strongly Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q12" value="Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q12" value="Disagree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q12" value="Strongly Disagree">
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+                  13. Transportation problems can make me absent.
+                </td>
+
+                <td>
+                  <input required type="radio" name="q13" value="Strongly Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q13" value="Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q13" value="Disagree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q13" value="Strongly Disagree">
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+                  14. Family or personal responsibilities can affect my attendance.
+                </td>
+
+                <td>
+                  <input required type="radio" name="q14" value="Strongly Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q14" value="Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q14" value="Disagree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q14" value="Strongly Disagree">
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+                  15. Heavy academic workload can affect my clinical attendance.
+                </td>
+
+                <td>
+                  <input required type="radio" name="q15" value="Strongly Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q15" value="Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q15" value="Disagree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q15" value="Strongly Disagree">
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+                  16. Examination and assignment pressure can contribute to absenteeism.
+                </td>
+
+                <td>
+                  <input required type="radio" name="q16" value="Strongly Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q16" value="Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q16" value="Disagree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q16" value="Strongly Disagree">
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+                  17. Inconvenient clinical schedules can affect attendance.
+                </td>
+
+                <td>
+                  <input required type="radio" name="q17" value="Strongly Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q17" value="Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q17" value="Disagree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q17" value="Strongly Disagree">
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+                  18. Poor communication of clinical schedules can contribute to absenteeism.
+                </td>
+
+                <td>
+                  <input required type="radio" name="q18" value="Strongly Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q18" value="Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q18" value="Disagree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q18" value="Strongly Disagree">
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+                  19. Poor supervision by clinical instructors can discourage attendance.
+                </td>
+
+                <td>
+                  <input required type="radio" name="q19" value="Strongly Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q19" value="Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q19" value="Disagree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q19" value="Strongly Disagree">
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+                  20. The attitude of clinical staff can affect my attendance.
+                </td>
+
+                <td>
+                  <input required type="radio" name="q20" value="Strongly Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q20" value="Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q20" value="Disagree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q20" value="Strongly Disagree">
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+                  21. Lack of adequate learning opportunities can reduce my motivation to attend.
+                </td>
+
+                <td>
+                  <input required type="radio" name="q21" value="Strongly Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q21" value="Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q21" value="Disagree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q21" value="Strongly Disagree">
+                </td>
+
+              </tr>
+
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </section>
+
+
+      <!-- SECTION D -->
+      <section class="section">
+
+        <h2>
+          SECTION D: MEASURES TO REDUCE ABSENTEEISM
+        </h2>
+
+        <p class="section-description">
+          Please select one response for each statement.
+        </p>
+
+        <div class="table-wrapper">
+
+          <table class="likert">
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Statement
+                </th>
+
+                <th>
+                  Strongly Agree
+                </th>
+
+                <th>
+                  Agree
+                </th>
+
+                <th>
+                  Disagree
+                </th>
+
+                <th>
+                  Strongly Disagree
+                </th>
+
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+
+              <tr>
+
+                <td>
+                  22. Better supervision by clinical instructors can improve attendance.
+                </td>
+
+                <td>
+                  <input required type="radio" name="q22" value="Strongly Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q22" value="Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q22" value="Disagree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q22" value="Strongly Disagree">
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+                  23. Proper coordination of academic and clinical schedules can reduce absenteeism.
+                </td>
+
+                <td>
+                  <input required type="radio" name="q23" value="Strongly Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q23" value="Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q23" value="Disagree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q23" value="Strongly Disagree">
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+                  24. Counselling and student support can improve clinical attendance.
+                </td>
+
+                <td>
+                  <input required type="radio" name="q24" value="Strongly Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q24" value="Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q24" value="Disagree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q24" value="Strongly Disagree">
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+                  25. A supportive clinical environment can encourage regular attendance.
+                </td>
+
+                <td>
+                  <input required type="radio" name="q25" value="Strongly Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q25" value="Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q25" value="Disagree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q25" value="Strongly Disagree">
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+                  26. Adequate clinical resources can encourage students to attend regularly.
+                </td>
+
+                <td>
+                  <input required type="radio" name="q26" value="Strongly Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q26" value="Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q26" value="Disagree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q26" value="Strongly Disagree">
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+                  27. Clear clinical schedules and attendance requirements can reduce absenteeism.
+                </td>
+
+                <td>
+                  <input required type="radio" name="q27" value="Strongly Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q27" value="Agree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q27" value="Disagree">
+                </td>
+
+                <td>
+                  <input type="radio" name="q27" value="Strongly Disagree">
+                </td>
+
+              </tr>
+
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </section>
+
+
+      <!-- Submit -->
+      <div class="submit-area">
+
+        <button
+          type="submit"
+          class="submit-button"
+        >
+          Submit Questionnaire
+        </button>
+
+        <div class="privacy">
+          Your responses are intended for academic research purposes.
+        </div>
+
+      </div>
+
+    </form>
+
+
+    <!-- Success message -->
+    <div
+      id="success"
+      class="form-card success"
+    >
+
+      <div class="success-icon">
+        ✓
+      </div>
+
+      <h2>
+        Response Submitted
+      </h2>
+
+      <p>
+        Thank you for taking the time to complete this questionnaire.
+      </p>
+
+      <p>
+        Your response has been received.
+      </p>
+
+    </div>
+
+  </main>
+
+
+  <!-- Footer -->
+  <footer>
+
+    <strong>
+      Tech Resonate Forms
+    </strong>
+
+    <br>
+
+    Research questionnaire platform
+
+    <br><br>
+
+    © <span id="year"></span>
+    Tech Resonate. All rights reserved.
+
+  </footer>
+
+
+  <script>
+
+    /*
+      ==========================================
+      BASIC FORM SUBMISSION
+      ==========================================
+
+      This currently displays a success screen.
+
+      IMPORTANT:
+      Responses are NOT permanently stored yet.
+
+      The next step is connecting this form to
+      Google Sheets / Supabase so every response
+      is saved automatically.
+    */
+
+    const form = document.getElementById("researchForm");
+
+    const success = document.getElementById("success");
+
+    form.addEventListener("submit", function(event) {
+
+      event.preventDefault();
+
+      /*
+        Check that all required questions
+        have been answered.
+      */
+
+      if (!form.checkValidity()) {
+
+        form.reportValidity();
+
+        return;
+
+      }
+
+      /*
+        Show success screen.
+      */
+
+      form.style.display = "none";
+
+      success.style.display = "flex";
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    });
+
+
+    /*
+      Current year
+    */
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+  </script>
+
+</body>
+</html>
